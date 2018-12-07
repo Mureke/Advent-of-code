@@ -18,10 +18,8 @@ class Counter:
 if __name__ == '__main__':
     counter = Counter()
     final = None
-    asd = 0
     while final is None:
         final = counter.get_data()
-        asd += 1
-        print(asd)
+
 
     print(final)
