@@ -26,7 +26,7 @@ def create_matrix(obj):
             o['y'] += o['vy']
             o['x'] += o['vx']
 
-            if o['y'] < 0 or o['y'] > 170 or o['x'] < 0  or o['x'] > 280:
+            if o['y'] < 0 or o['y'] > 170 or o['x'] < 0 or o['x'] > 280:
                 ready = False
 
         counter += 1
