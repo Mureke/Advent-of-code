@@ -5,25 +5,25 @@ fn main() {
     values[2] = 2;
     'first: loop {
         match values[i] {
-            1 => { values = handle(values, &i, 1) }
-            2 => { values = handle(values, &i, 2) }
+            1 => { values = handle(values, i, 1) }
+            2 => { values = handle(values, i, 2) }
             99 => { break 'first; }
             _ => println!("error!")
         }
         i += 4;
     }
-    println!("Value in 0 index: {}", values[0])
+    println!("Answer to 2.1: {}", values[0])
 }
 
-fn handle(mut values: Vec<i32>, i: &usize, t: i8) -> Vec<i32> {
-    let pos1 = values[i + 1] as usize;
-    let pos2 = values[i + 2] as usize;
-    let index = values[i + 3] as usize;
+fn handle(mut values: Vec<i32>, i: usize, t: i8) -> Vec<i32> {
+    let pos1: usize = values[i + 1] as usize;
+    let pos2: usize = values[i + 2] as usize;
+    let index: usize = values[i + 3] as usize;
 
     if t == 1 {
         values[index] = values[pos1] + values[pos2];
     } else if t == 2 {
-        values[index] =  values[pos1] * values[pos2];
+        values[index] = values[pos1] * values[pos2];
     }
     values
 }
