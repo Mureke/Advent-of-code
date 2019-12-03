@@ -6,30 +6,32 @@ fn main() {
     println!("Value in 0 index: {}", values[0]);
 
     'first: loop {
-        let current_val = values[i];
-        match current_val {
-            1 => {values = handle_one(values, &i)},
-            2 => {values = handle_two(values, &i)},
+        match values[i] {
+            1 => {values = handle_one(values, i)},
+            2 => {values = handle_two(values, i)},
             99 => {break 'first},
             _ => println!("error!")
         }
-        i += 4
+        i += 4;
     }
     println!("Value in 0 index: {}", values[0])
 }
 
-fn handle_one(mut values: Vec<i32>, i: &usize) -> Vec<i32> {
+fn handle_one(mut values: Vec<i32>, i: usize) -> Vec<i32> {
+
     let param1 = values[i+1];
     let param2 = values[i+2];
     let index = values[i+3] as usize;
+
     values[index] = param1 + param2;
     values
 }
 
-fn handle_two(mut values: Vec<i32>, i: &usize) -> Vec<i32> {
+fn handle_two(mut values: Vec<i32>, i: usize) -> Vec<i32> {
     let param1 = values[i+1];
     let param2 = values[i+2];
     let index = values[i+3] as usize;
+
     values[index] = param1 * param2;
     values
 }
