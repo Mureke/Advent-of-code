@@ -20,6 +20,10 @@ fn main() {
                 i += 4;
             }
 
+            if first_value == 12 && second_value == 2 {
+                println!("Answer to 2.1 = {}", values[0])
+            }
+
             if values[0] == 19690720 {
                 println!("Answer to 2.2 = {}", 100 * first_value + second_value);
                 break 'outer;
