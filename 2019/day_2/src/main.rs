@@ -34,6 +34,7 @@ fn main() {
         // increase 2nd value and break if > 99
         second_value += 1;
         if second_value > 99 {
+            println!("Error! Couldn't find the answer");
             break 'outer;
         }
     }
