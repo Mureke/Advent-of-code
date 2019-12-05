@@ -37,7 +37,6 @@ fn main() {
 }
 
 fn get_shortest(points1: Vec<Point>, points2: Vec<Point>) -> (u32, u32) {
-    println!("Getting shortest distance and step count");
     let mut shortest_dist: u32 = u32::max_value();
     let mut shortest_steps: u32 = u32::max_value();
 
@@ -45,11 +44,9 @@ fn get_shortest(points1: Vec<Point>, points2: Vec<Point>) -> (u32, u32) {
         for point2 in &points2 {
             if point1.compare_points(point2){
                 if point1.find_distance() < shortest_dist {
-                    println!("Found shorter step distance");
                     shortest_dist = point1.find_distance()
                 }
                 if point1.get_step_count(point2) < shortest_steps{
-                    println!("Found shorter step count");
                     shortest_steps = point1.get_step_count(point2)
                 }
             }
