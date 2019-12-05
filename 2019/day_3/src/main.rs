@@ -3,15 +3,20 @@ use std::time::{Instant};
 struct Point {
     x: i32,
     y: i32,
+    steps: u32,
 }
 
 impl Point {
-    fn find_distance(&self) -> i32 {
-        self.x.abs() + self.y.abs()
+    fn find_distance(&self) -> u32 {
+        (self.x.abs() + self.y.abs()) as u32
     }
 
     fn compare_points(&self, point: &Point) -> bool{
         self.x == point.x && self.y == point.y
+    }
+
+    fn get_step_count(&self, point: &Point) -> u32 {
+        self.steps + point.steps
     }
 }
 
@@ -25,32 +30,43 @@ fn main() {
     let  wire_2_points: Vec<Point> = get_wire_points(wire_2);
 
     let shortest = get_shortest(wire_1_points, wire_2_points);
-    println!("Answer to part 1: {}", shortest);
+    println!("Answer to part 1: {}", shortest.0);
+    println!("Answer to part 2: {}", shortest.1);
     println!("Time elapsed: {}", now.elapsed().as_secs());
 
 }
 
-fn get_shortest(mut points1: Vec<Point>,mut points2: Vec<Point>) -> i32 {
-    points1.sort_by(|a,b| a.find_distance().cmp(&b.find_distance()));
-    points2.sort_by(|a,b| a.find_distance().cmp(&b.find_distance()));
+fn get_shortest(points1: Vec<Point>, points2: Vec<Point>) -> (u32, u32) {
+    println!("Getting shortest distance and step count");
+    let mut shortest_dist: u32 = u32::max_value();
+    let mut shortest_steps: u32 = u32::max_value();
+
     'outer: for point1 in &points1 {
         for point2 in &points2 {
             if point1.compare_points(point2){
-                return point1.find_distance()
+                if point1.find_distance() < shortest_dist {
+                    println!("Found shorter step distance");
+                    shortest_dist = point1.find_distance()
+                }
+                if point1.get_step_count(point2) < shortest_steps{
+                    println!("Found shorter step count");
+                    shortest_steps = point1.get_step_count(point2)
+                }
             }
         }
     }
-    panic!("No crossed wires found!")
+    (shortest_dist, shortest_steps)
 }
 
 fn get_wire_points(wire: Vec<&str>) -> Vec<Point> {
     let mut point_vector: Vec<Point> = vec![];
     let mut x: i32 = 0;
     let mut y: i32 = 0;
+    let mut steps: u32 = 0;
     for part in &wire {
         let splitted = part.split_at(1);
-        let steps = splitted.1.parse().unwrap();
-        for _step in 0..steps {
+        let part_steps = splitted.1.parse().unwrap();
+        for _ in 0..part_steps {
             match splitted.0 {
                 "R" => x += 1,
                 "L" => x -= 1,
@@ -58,7 +74,8 @@ fn get_wire_points(wire: Vec<&str>) -> Vec<Point> {
                 "D" => y -= 1,
                 _ => panic!("Error, invalid direction"),
             }
-            point_vector.push(Point{x,y});
+            steps += 1;
+            point_vector.push(Point{x,y, steps});
         }
     }
     point_vector
