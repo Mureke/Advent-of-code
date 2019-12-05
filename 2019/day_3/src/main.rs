@@ -25,11 +25,8 @@ fn main() {
 }
 
 fn get_shortest(mut points1: Vec<Point>,mut points2: Vec<Point>) -> i32 {
-    println!("Sorting vector 1");
     points1.sort_by(|a,b| a.find_distance().cmp(&b.find_distance()));
-    println!("Sorting vector 2");
     points2.sort_by(|a,b| a.find_distance().cmp(&b.find_distance()));
-    let mut shortest_point = Point{x:0,y:0};
     'outer: for point1 in &points1 {
         for point2 in &points2 {
 
@@ -40,7 +37,7 @@ fn get_shortest(mut points1: Vec<Point>,mut points2: Vec<Point>) -> i32 {
             }
         }
     }
-    shortest_point.find_distance()
+    panic!("No crossed wires found!")
 }
 
 fn get_wire_points(wire: Vec<&str>) -> Vec<Point> {
