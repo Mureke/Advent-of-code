@@ -6,9 +6,10 @@ fn main() {
 
     let mut j = 0;
     let re1 = Regex::new(r"^(\w)\1+$").unwrap();
-    let re2 = Regex::new(r"^(?=\d{6}$)1*2*3*4*5*6*7*8*9*0*$").unwrap();
+    let re2 = Regex::new(r"^(?=\d{6}$)1?2?3?4?5?6?7?8?9?0?$").unwrap();
     for i in 402328..864247 + 1 {
-        if re1.is_match(&i.to_string()).is_ok() && re2.is_match(&i.to_string()).is_ok() {
+        if re1.find(&i.to_string()).unwrap().is_some() && re2.find(&i.to_string()).unwrap().is_some() {
+            println!("{}", i);
             j += 1
         }
     }
