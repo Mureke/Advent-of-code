@@ -12,15 +12,15 @@ pub fn number_to_vec(n: i32) -> (Vec<i32>, i32) {
     (digits, i)
 }
 
-pub fn right_pad_with_zeros(mut vector: Vec<i32>, size: i32) -> Vec<i32> {
-    for i in 0..size {
-        vector.push(0)
-    }
-    vector
-}
+//pub fn right_pad_with_zeros(mut vector: Vec<i32>, size: i32) -> Vec<i32> {
+//    for i in 0..size {
+//        vector.push(0)
+//    }
+//    vector
+//}
 
 pub fn left_pad_with_zeros(mut vector: Vec<i32>, size: i32) -> Vec<i32> {
-    for i in 0..size {
+    for _i in 0..size {
         vector.push(0)
     }
     vector.reverse();
