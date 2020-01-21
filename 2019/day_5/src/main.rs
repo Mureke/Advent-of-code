@@ -49,10 +49,8 @@ fn get_value_by_mode(values: &Vec<i32>, i: usize, m: i32, val_index: usize) -> i
 
 fn handle_instructions(mut values: Vec<i32>, i: usize, t: i8, modes: Vec<i32>) -> Vec<i32> {
     let modes_length = modes.len();
-    println!("i: {}, t: {}, modes: {:?}, modes_len: {}", i, t, modes, modes_length);
-    let mut val1 = 0;
     let mut val2 = 0;
-    val1 = get_value_by_mode(&values, i, modes[modes_length - 1], 1);
+    let val1 = get_value_by_mode(&values, i, modes[modes_length - 1], 1);
     if t != 4 {
         val2 = get_value_by_mode(&values, i, modes[modes_length - 2], 2);
     }
@@ -61,7 +59,6 @@ fn handle_instructions(mut values: Vec<i32>, i: usize, t: i8, modes: Vec<i32>) -
         changed_pos = values[i + 1] as usize;
     }
     // Handle single input when t = 3
-    println!("val1: {}, val2: {}, changed_pos: {}", val1, val2, changed_pos);
     if t == 1 {
         // opcode 01 = sum
         values[changed_pos] = val1 + val2;
@@ -70,7 +67,6 @@ fn handle_instructions(mut values: Vec<i32>, i: usize, t: i8, modes: Vec<i32>) -
         values[changed_pos] = val1 * val2;
     } else if t == 3 {
         changed_pos = values[i + 1] as usize;
-        println!("setting value {} to positon {}", val1, changed_pos);
         values[changed_pos] = val1;
     } else if t == 4 {
         // opcode 04
