@@ -26,8 +26,8 @@ fn main() {
             99 => {println!("Halting the program"); break 'inner2; }
             _ => println!("error!")
         }
-        // Instruction 3 only takes one parameter. Therefore we only increase index by 2
-        if instruction == 3 {
+        // Instructions 3 and 4 only take one parameter. Therefore we only increase index by 2
+        if instruction == 3 || instruction == 4 {
             i += 2
         } else {
             i += 4;
@@ -36,21 +36,26 @@ fn main() {
 }
 
 
-fn get_value_by_mode(values: &Vec<i32>, i: usize, m: i32) -> i32 {
+fn get_value_by_mode(values: &Vec<i32>, i: usize, m: i32, val_index: usize) -> i32 {
     // Gets correct value from value vector based on mode
     let mut value: i32 = 0;
     if m == 0 {
-        value = values[values[i + 1] as usize];
+        value = values[values[i + val_index] as usize];
     } else if m == 1 {
-        value = values[i + 1];
+        value = values[i + val_index];
     }
     value
 }
 
 fn handle_instructions(mut values: Vec<i32>, i: usize, t: i8, modes: Vec<i32>) -> Vec<i32> {
     let modes_length = modes.len();
-    let val1 = get_value_by_mode(&values, i, modes[modes_length - 1]);
-    let val2 = get_value_by_mode(&values, i, modes[modes_length - 2]);
+    println!("i: {}, t: {}, modes: {:?}, modes_len: {}", i, t, modes, modes_length);
+    let mut val1 = 0;
+    let mut val2 = 0;
+    val1 = get_value_by_mode(&values, i, modes[modes_length - 1], 1);
+    if t != 4 {
+        val2 = get_value_by_mode(&values, i, modes[modes_length - 2], 2);
+    }
     let mut changed_pos = values[i + 3] as usize;
     if modes[modes_length - 3] == 1 {
         changed_pos = values[i + 1] as usize;
@@ -65,14 +70,12 @@ fn handle_instructions(mut values: Vec<i32>, i: usize, t: i8, modes: Vec<i32>) -
         values[changed_pos] = val1 * val2;
     } else if t == 3 {
         changed_pos = values[i + 1] as usize;
+        println!("setting value {} to positon {}", val1, changed_pos);
         values[changed_pos] = val1;
     } else if t == 4 {
         // opcode 04
+        changed_pos = values[i + 1] as usize;
         println!("ERROR CODE: {}", values[changed_pos])
     }
     values
 }
-
-
-// < 39790864
-// > 238
