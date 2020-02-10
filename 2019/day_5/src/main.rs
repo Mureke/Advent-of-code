@@ -51,7 +51,7 @@ fn handle_instructions(mut values: Vec<i32>, i: usize, t: i8, modes: Vec<i32>) -
     let modes_length = modes.len();
     let mut val2 = 0;
     let val1 = get_value_by_mode(&values, i, modes[modes_length - 1], 1);
-    if t != 4 || t != 3 {
+    if t != 4 && t != 3 {
         val2 = get_value_by_mode(&values, i, modes[modes_length - 2], 2);
     }
     let mut changed_pos = values[i + 3] as usize;
