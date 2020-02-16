@@ -13,10 +13,10 @@ impl fmt::Debug for Mode {
 
 pub struct Computer {
     pointer: usize,
-    pub memory: Vec<i32>,
+    memory: Vec<i32>,
 
     input: Vec<i32>,
-    output: Vec<i32>,
+    pub output: Vec<i32>,
 }
 
 impl Computer {
@@ -36,10 +36,11 @@ impl Computer {
             .map(|c| c.to_digit(10).unwrap())
             .collect();
         num_vec.reverse();
-        let asd = num_vec.get(parameter_index+2);
-        match num_vec.get(parameter_index+2) {
-            Some(&1) => { Mode::Immediate },
-            None => { Mode::Position },
+        match num_vec.get(parameter_index+1) {
+            Some(&1) => {
+                Mode::Immediate },
+            None => {
+                Mode::Position },
             _ => { Mode::Position}
         }
     }
@@ -50,6 +51,7 @@ impl Computer {
 
         match mode {
             Mode::Position => {
+
                 self.memory[self.memory[val_index] as usize]
             },
             Mode::Immediate => {
@@ -74,17 +76,23 @@ impl Computer {
             let steps = match opcode {
                 1 => {
                     let (val1, val2) = (self.get_parameter(1), self.get_parameter(2));
-                    self.memory[(self.pointer + 3) as usize] = val1 + val2;
+                    let target = self.memory[pointer+3];
+                    self.memory[target as usize] = val1 + val2;
                     4
                 },
                 2 => {
                     let (val1, val2) = (self.get_parameter(1), self.get_parameter(2));
-                    self.memory[(self.pointer + 3) as usize] = val1 * val2;
+                    let target = self.memory[pointer+3];
+                    self.memory[target as usize] = val1 * val2;
                     4
                 },
                 3 => {
                     let address = self.get_address(1);
                     self.memory[address] = self.input.remove(0);
+                    2
+                },
+                4 => {
+                    self.output.push(self.get_parameter(1));
                     2
                 },
                 99 => { break; },

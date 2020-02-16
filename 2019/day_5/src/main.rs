@@ -1,4 +1,3 @@
-use std::iter::FromIterator;
 use std::fs;
 use crate::computer::{Computer};
 
@@ -11,7 +10,7 @@ fn main() {
 
     let initial_memory: Vec<i32> = input_data.trim().split(',').map(|s| s.parse().unwrap()).collect();
 
-    let mut computer: Computer = Computer::new(initial_memory, vec![12]);
+    let mut computer: Computer = Computer::new(initial_memory, vec![1]);
     computer.execute();
-    println!("{}", computer.memory[0]);
+    println!("{:?}", computer.output);
 }
