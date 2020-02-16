@@ -158,14 +158,14 @@ fn test_panic() {
 
 #[test]
 fn test_opcode_one() {
-    let mut comp = Computer::new(vec![1, 2, 3, 0, 99, 1], vec![1]);
+    let mut comp = Computer::new(vec![1101, 2, 3, 0, 99, 1], vec![1]);
     comp.execute();
-    assert_eq!(comp.memory[3], 3);
+    assert_eq!(comp.memory[0], 5);
 }
 
 #[test]
 fn test_opcode_two() {
-    let mut comp = Computer::new(vec![2, 2, 3, 4, 99, 1], vec![1]);
+    let mut comp = Computer::new(vec![1102, 4, 3, 3, 99, 1], vec![1]);
     comp.execute();
     assert_eq!(comp.memory[3], 12);
 }
