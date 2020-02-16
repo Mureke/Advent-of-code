@@ -149,6 +149,12 @@ fn test_halt() {
     comp.execute();
     assert_eq!(comp.pointer, 0);
 }
+#[test]
+#[should_panic]
+fn test_panic() {
+    let mut comp = Computer::new(vec![54, 3], vec![1]);
+    comp.execute();
+}
 
 #[test]
 fn test_opcode_one() {
