@@ -1,5 +1,3 @@
-import numpy as np
-
 def get_formatted_data() -> []:
     with open('data.txt', 'r') as f:
         lines = [line.strip() for line in f.readlines()]
@@ -16,6 +14,6 @@ def get_formatted_data() -> []:
 
 
 if __name__ == '__main__':
-    print(sum(list(map(lambda x: len(set(''.join(x))), get_formatted_data()))))
-    print(sum(list(map(lambda x: len(set.intersection(*[set(y) for y in x])), get_formatted_data()))))
+    print(sum(map(lambda x: len(set(''.join(x))), get_formatted_data())))
+    print(sum(map(lambda x: len(set.intersection(*[set(y) for y in x])), get_formatted_data())))
 
