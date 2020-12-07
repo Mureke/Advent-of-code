@@ -4,7 +4,7 @@ COLS_START = 0
 COLS_END = 7
 
 
-def decode_line(line='FBFBBFFRLR'):
+def decode_line(line):
     row_start = ROWS_START
     row_end = ROWS_END
     cols_start = COLS_START
