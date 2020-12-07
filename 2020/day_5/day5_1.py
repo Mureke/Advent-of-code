@@ -26,7 +26,6 @@ def decode_line(line='FBFBBFFRLR'):
 
 if __name__ == '__main__':
     answer = 0
-    test = decode_line()
     with open('data.txt', 'r') as f:
         lines = [line.strip() for line in f.readlines()]
         for line in lines:
