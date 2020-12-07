@@ -14,6 +14,6 @@ def get_formatted_data() -> []:
 
 
 if __name__ == '__main__':
-    print(sum(map(lambda x: len(set(''.join(x))), get_formatted_data())))
-    print(sum(map(lambda x: len(set.intersection(*[set(y) for y in x])), get_formatted_data())))
+    print('Part 1: ', sum(map(lambda x: len(set(''.join(x))), get_formatted_data())))
+    print('Part 2: ', sum(map(lambda x: len(set.intersection(*[set(y) for y in x])), get_formatted_data())))
 
