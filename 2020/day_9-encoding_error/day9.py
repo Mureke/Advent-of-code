@@ -46,5 +46,3 @@ if __name__ == '__main__':
     answer = get_answer1(data)
     print(answer)
     print(get_answer2(data, answer))
-
-# > 2893044
