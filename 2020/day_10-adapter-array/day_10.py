@@ -4,7 +4,11 @@ def get_formatted_data() -> []:
 
 
 def get_answer(numbers):
-
+    numbers.append(max(numbers) + 3)
+    one_diff = 0
+    three_diff = 0
+    for i, num in enumerate(numbers.sort()):
+        print(numbers)
     return 0
 
 
