@@ -1,7 +1,10 @@
 use std::fs;
 
-pub fn read_file(file_path: &str) -> Vec<String> {
+pub fn read_file(file_path: &str) -> String {
     let input_data = fs::read_to_string(file_path).expect("File doesn't exist");
+    input_data
+}
 
-    input_data.trim().split('\n').map(|s| s.parse().unwrap()).collect()
+pub fn parse_input(input: String) -> Vec<i32> {
+    input.trim().split('\n').map(|s| s.parse().unwrap()).collect()
 }
