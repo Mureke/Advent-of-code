@@ -18,8 +18,8 @@ impl SubMarine {
     }
 
     pub fn go_forward(&mut self, amount: i32) {
-        self.horizontal = self.horizontal + amount;
-        self.depth = self.depth + (amount*self.aim);
+        self.horizontal += amount;
+        self.depth += (amount*self.aim);
     }
 
     pub fn go_down(&mut self, amount: i32) {
@@ -31,7 +31,7 @@ impl SubMarine {
     }
 
     fn adjust_aim(&mut self, amount: i32) {
-        self.aim = self.aim + amount;
+        self.aim += amount;
     }
 
     pub fn get_answer(&self) -> i32 {
@@ -47,21 +47,20 @@ pub fn solve() {
     let mut part2_sub = SubMarine::new();
 
     for direction in input.iter() {
-        let parsed: Vec<&str> = direction.split(" ").collect();
+        let parsed: Vec<&str> = direction.split_whitespace().collect();
         let dir = parsed.get(0).unwrap();
         let amount: i32 = parsed.get(1).unwrap().parse().unwrap();
 
         if dir == &"forward" {
-            horizontal = horizontal + amount;
+            horizontal += amount;
             part2_sub.go_forward(amount);
 
         } else if dir == &"down" {
-
-            depth = depth + amount;
+            depth += amount;
             part2_sub.go_down(amount);
 
         } else {
-            depth = depth - amount;
+            depth -= amount;
             part2_sub.go_up(amount);
         }
     }
