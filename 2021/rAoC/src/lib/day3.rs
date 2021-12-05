@@ -11,10 +11,6 @@ fn get_parsed_data() -> Vec<Vec<u32>> {
     return matrix;
 }
 
-fn to_u32(slice: &[u8]) -> u32 {
-    slice.iter().rev().fold(0, |acc, &b| acc*2 + b as u32)
-}
-
 pub fn solve() {
     let mut matrix = get_parsed_data();
 
