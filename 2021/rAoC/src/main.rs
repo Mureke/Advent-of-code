@@ -15,4 +15,7 @@ fn main() {
     // Day 5 done in python
     println!();
     day6::solve();
+
+    println!();
+    day7::solve();
 }
