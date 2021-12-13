@@ -16,9 +16,17 @@ def solve():
         if x1 == x2 or y1 == y2:
             straight_lines += [(x, y) for x in range(x1, x2 + 1) for y in range(y1, y2 + 1)]
 
-        elif y1 > y2:
-            print("")
-
+        elif y1 < y2:
+            for i, x in enumerate(range(x1, x2+1)):
+                diagonal_lines.append((x, y1+i))
+        else:
+            for i, x in enumerate(range(x1, x2+1)):
+                diagonal_lines.append((x, y1-i))
     counter = Counter(straight_lines)
     res = list(filter(None, [v > 1 for v in counter.values()]))
-    print(len(res))
+    print(f"Day 5 Part1: {len(res)}")
+
+    counter += Counter(diagonal_lines)
+
+    res2 = list(filter(None, [v > 1 for v in counter.values()]))
+    print(f"Day 5 Part2: {len(res2)}")
