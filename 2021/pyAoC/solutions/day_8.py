@@ -37,7 +37,7 @@ def solve_day_2(data):
 
         for item in full.split(" "):
             if len(item) == 5: # 3 or 5 or 2
-                if numbers[1] in list(item):
+                if len(set(numbers[1] + list(item))) == 5:
                     numbers[3] = list(item)
                 else:
                     numbers[5] = list(item)
